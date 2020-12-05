@@ -7,6 +7,7 @@
       let playerScore = 0,
         computerScore = 0,
         result;
+
       function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
       }
@@ -26,6 +27,9 @@
       }
 
       function playRound(playerSelection, computerSelection) {
+        playerSelection = playerPlay();
+        computerSelection = computerPlay();
+
         if (playerSelection == computerSelection) {
           result = `It is a tie, you and the computer chose ${playerSelection}`;
         } else if (
@@ -39,15 +43,27 @@
           computerScore += 1;
           result = `You Lose! ${computerSelection} beats ${playerSelection}`;
         }
-        return result;
+        return console.log(result);
       }
 
-      const playerSelection = playerPlay();
-      const computerSelection = computerPlay();
+      function game() {
+        let i = 0;
+        let finalresult;
+        while (i < 5) {
+          playRound();
+          i++;
+        }
+        if (playerScore == computerScore) {
+          finalresult = `I can't believe it, It's a Tie!`;
+        } else if (playerScore > computerScore) {
+          finalresult = `Well done, You win!`;
+        } else {
+          finalresult = `Better luck next time, You lose!`;
+        }
+        return finalresult;
+      }
 
-      console.log(playRound(playerSelection, computerSelection));
-      console.log(`You chose ${playerSelection}`);
-      console.log(`The computer chose ${computerSelection}`);
+      console.log(game());
       console.log(`Player score:${playerScore}`);
       console.log(`Computer score:${computerScore}`);
     </script>
